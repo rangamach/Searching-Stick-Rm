@@ -151,6 +151,9 @@
     <ClCompile Include="source\UI\UIElement\TextView.cpp" />
     <ClCompile Include="source\UI\UIElement\UIView.cpp" />
     <ClCompile Include="source\UI\UISerive.cpp" />
+    <ClCompile Include="source\Gameplay\StickCollection\StickCollectionModel.cpp" />
+    <ClCompile Include="source\Gameplay\StickCollection\StickCollectionView.cpp" />
+    <ClCompile Include="source\Gameplay\StickCollection\StickCollectionController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Gameplay\GameplayService.h" />
@@ -171,6 +174,10 @@
     <ClInclude Include="include\UI\UIElement\TextView.h" />
     <ClInclude Include="include\UI\UIElement\UIView.h" />
     <ClInclude Include="include\UI\UIService.h" />
+    <ClInclude Include="include\Gameplay\StickCollection\Stick.h" />
+    <ClInclude Include="include\Gameplay\StickCollection\StickCollectionModel.h" />
+    <ClInclude Include="include\Gameplay\StickCollection\StickCollectionView.h" />
+    <ClInclude Include="include\Gameplay\StickCollection\StickCollectionController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
