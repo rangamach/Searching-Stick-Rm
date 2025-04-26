@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
 #include <vector>
 
 namespace Gameplay
@@ -26,7 +27,7 @@ namespace Gameplay
 			void UpdateStickPosition();
 			void ResetSticksColor();
 			void InitializeSticksArray();
-			float CalculateStickHeight();
+			//float CalculateStickHeight();
 			float CalculateStickHeight(int array_position);
 
 		public:

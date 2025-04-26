@@ -8,6 +8,7 @@ namespace Gameplay
 	{
 		struct Stick
 		{
+		public:
 			int data;
 			UI::UIElement::RectangleShapeView* stick_view;
 
