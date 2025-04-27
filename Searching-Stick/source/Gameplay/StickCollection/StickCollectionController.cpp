@@ -4,6 +4,8 @@
 #include "Gameplay/StickCollection/Stick.h"
 #include "Gameplay/GameplayService.h"
 #include "Global/ServiceLocator.h"
+#include "Sound/SoundService.h"
+#include <random>
 
 namespace Gameplay
 {
@@ -69,13 +71,49 @@ namespace Gameplay
 			for (i = 0; i < stick_collection_model->number_of_sticks; i++)
 				sticks.push_back(new Stick(i));
 		}
-		//float StickCollectionController::CalculateStickHeight()
-		//{
-		//	
-		//}
 		float StickCollectionController::CalculateStickHeight(int array_position)
 		{
 			return (static_cast<float>(array_position + 1) / stick_collection_model->number_of_sticks) * stick_collection_model->max_stick_height;
+		}
+		void StickCollectionController::ShuffleSticks()
+		{
+			std::random_device device;
+			std::mt19937 random_engine(device());
+
+			std::shuffle(sticks.begin(), sticks.end(), random_engine);
+		}
+		void StickCollectionController::ResetSearchStick()
+		{
+			stick_to_search = sticks[std::rand() % sticks.size()];
+			stick_to_search->stick_view->setFillColor(stick_collection_model->search_stick_color);
+		}
+		void StickCollectionController::ResetVariables()
+		{
+			number_of_array_access = 0;
+			number_of_comparisons = 0;
+		}
+		void StickCollectionController::ProcessLinearSearch()
+		{
+			int i;
+			for (i = 0; i < sticks.size(); i++)
+			{
+				number_of_array_access++;
+				number_of_comparisons++;
+
+				ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::Comparing_Sound);
+
+				if (sticks[i] == stick_to_search)
+				{
+					stick_to_search->stick_view->setFillColor(stick_collection_model->found_stick_color);
+					stick_to_search = nullptr;
+					return;
+				}
+				else
+				{
+					sticks[i]->stick_view->setFillColor(stick_collection_model->processing_stick_color);
+					sticks[i]->stick_view->setFillColor(stick_collection_model->stick_color);
+				}
+			}
 		}
 		StickCollectionController::StickCollectionController()
 		{
@@ -106,8 +144,11 @@ namespace Gameplay
 		}
 		void StickCollectionController::Reset()
 		{
+			ShuffleSticks();
 			UpdateStickPosition();
 			ResetSticksColor();
+			ResetSearchStick();
+			ResetVariables();
 		}
 		SearchType StickCollectionController::GetSearchType()
 		{
@@ -119,7 +160,21 @@ namespace Gameplay
 		}
 		void StickCollectionController::SearchElement(SearchType type)
 		{
-			
+			this->search_type = type;
+			switch (search_type)
+			{
+			case Gameplay::StickCollection::SearchType::LinearSearch:
+				ProcessLinearSearch();
+				break;
+			}
+		}
+		int StickCollectionController::GetNumberOfComparisons()
+		{
+			return number_of_comparisons;
+		}
+		int StickCollectionController::GetNumberOfArrayAccess()
+		{
+			return number_of_array_access;
 		}
 	}
 }

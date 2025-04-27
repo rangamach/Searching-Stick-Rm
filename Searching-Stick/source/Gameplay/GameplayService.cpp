@@ -9,6 +9,10 @@ namespace Gameplay
 		delete gameplay_controller;
 		delete stick_collection_controller;
 	}
+	void GameplayService::InitializeRandomSeed()
+	{
+		std::srand(static_cast<unsigned int>(std::time(nullptr)));
+	}
 	GameplayService::GameplayService()
 	{
 		gameplay_controller = new GameplayController();
@@ -22,6 +26,7 @@ namespace Gameplay
 	{
 		gameplay_controller->Initialize();
 		stick_collection_controller->Initialize();
+		InitializeRandomSeed();
 	}
 	void GameplayService::Update()
 	{

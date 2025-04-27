@@ -16,6 +16,8 @@ namespace Gameplay
 
 		void Destroy();
 
+		void InitializeRandomSeed();
+
 	public:
 		GameplayService();
 		~GameplayService();
