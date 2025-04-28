@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\UI\Gameplay\GameplayUIController.cpp" />
     <ClCompile Include="source\Gameplay\GameplayService.cpp" />
     <ClCompile Include="source\Gameplay\GameplayView.cpp" />
     <ClCompile Include="source\Gameplay\GameplayController.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="source\Gameplay\StickCollection\StickCollectionController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\UI\Gameplay\GameplayUIController.h" />
     <ClInclude Include="include\Gameplay\GameplayService.h" />
     <ClInclude Include="include\Gameplay\GameplayView.h" />
     <ClInclude Include="include\Gameplay\GameplayController.h" />

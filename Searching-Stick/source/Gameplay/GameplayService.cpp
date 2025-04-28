@@ -55,4 +55,20 @@ namespace Gameplay
 	{
 		return stick_collection_controller->GetNumberOfSticks();
 	}
+	int GameplayService::GetNumberOfComparisons()
+	{
+		return stick_collection_controller->GetNumberOfComparisons();
+	}
+	int GameplayService::GetNumberOfArrayAccess()
+	{
+		return stick_collection_controller->GetNumberOfArrayAccess();
+	}
+	int GameplayService::GetDelayMilliseconds()
+	{
+		return stick_collection_controller->GetDelayMilliseconds();
+	}
+	sf::String GameplayService::GetTimeComplexity()
+	{
+		return stick_collection_controller->GetTimeComplexity();
+	}
 }

@@ -31,6 +31,10 @@ namespace Gameplay
 		void SearchElement(StickCollection::SearchType type);
 		StickCollection::SearchType GetCurrentSearchType();
 		int GetNumberOfSticks();
+		int GetNumberOfComparisons();
+		int GetNumberOfArrayAccess();
+		int GetDelayMilliseconds();
+		sf::String GetTimeComplexity();
 	};
 }
 
