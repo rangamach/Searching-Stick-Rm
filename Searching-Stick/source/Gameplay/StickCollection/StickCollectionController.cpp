@@ -179,6 +179,7 @@ namespace Gameplay
 			switch (search_type)
 			{
 			case Gameplay::StickCollection::SearchType::LinearSearch:
+				time_complexity = "O(n)";
 				current_operation_delay = stick_collection_model->linear_search_delay;
 				search_thread = std::thread(&StickCollectionController::ProcessLinearSearch, this);
 				break;
@@ -195,6 +196,10 @@ namespace Gameplay
 		int StickCollectionController::GetDelayMilliseconds()
 		{
 			return current_operation_delay;
+		}
+		sf::String StickCollectionController::GetTimeComplexity()
+		{
+			return time_complexity;
 		}
 	}
 }

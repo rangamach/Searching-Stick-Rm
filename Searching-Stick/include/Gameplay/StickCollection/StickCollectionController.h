@@ -27,6 +27,8 @@ namespace Gameplay
 
 			std::thread search_thread;
 
+			sf::String time_complexity;
+
 			void Destroy();
 
 			void InitializeSticks();
@@ -59,6 +61,7 @@ namespace Gameplay
 			int GetNumberOfComparisons();
 			int GetNumberOfArrayAccess();
 			int GetDelayMilliseconds();
+			sf::String GetTimeComplexity();
 
 		};
 	}
