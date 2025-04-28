@@ -108,6 +108,9 @@ namespace UI
 			case Gameplay::StickCollection::SearchType::LinearSearch:
 				search_type_text->setText("Linear Search");
 				break;
+			case Gameplay::StickCollection::SearchType::BinarySearch:
+				search_type_text->setText("Binary Search");
+				break;
 			}
 			search_type_text->update();
 		}

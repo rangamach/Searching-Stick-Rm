@@ -118,6 +118,36 @@ namespace Gameplay
 				}
 			}
 		}
+		void StickCollectionController::ProcessBinarySearch()
+		{
+			int left = 0;
+			int right = sticks.size();
+
+			while (left < right)
+			{
+				int mid = left + (right - left) / 2;
+
+				number_of_array_access += 2;
+				number_of_comparisons++;
+
+				ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::Comparing_Sound);
+
+				if (sticks[mid] == stick_to_search)
+				{
+					sticks[mid]->stick_view->setFillColor(stick_collection_model->found_stick_color);
+					stick_to_search = nullptr;
+					return;
+				}
+				sticks[mid]->stick_view->setFillColor(stick_collection_model->processing_stick_color);
+				std::this_thread::sleep_for(std::chrono::milliseconds(current_operation_delay));
+				sticks[mid]->stick_view->setFillColor(stick_collection_model->stick_color);
+
+				number_of_array_access++;
+
+				if (sticks[mid]->data <= stick_to_search->data) left = mid;
+				else right = mid;
+			}
+		}
 		void StickCollectionController::ProcessSearchThreadState()
 		{
 			if (search_thread.joinable() && stick_to_search == nullptr)
@@ -126,6 +156,16 @@ namespace Gameplay
 		void StickCollectionController::JoinThreads()
 		{
 			search_thread.join();
+		}
+		void StickCollectionController::SortElements()
+		{
+			std::sort(sticks.begin(), sticks.end(), [this](const Stick* stick_1, const Stick* stick_2) { return CompareElementsByData(stick_1, stick_2);});
+
+			UpdateStickPosition();
+		}
+		bool StickCollectionController::CompareElementsByData(const Stick* stick_1, const Stick* stick_2)
+		{
+			return stick_1->data < stick_2->data;
 		}
 		StickCollectionController::StickCollectionController()
 		{
@@ -182,6 +222,16 @@ namespace Gameplay
 				time_complexity = "O(n)";
 				current_operation_delay = stick_collection_model->linear_search_delay;
 				search_thread = std::thread(&StickCollectionController::ProcessLinearSearch, this);
+				break;
+
+			case Gameplay::StickCollection::SearchType::BinarySearch:
+				time_complexity = "O(log n)";
+				SortElements();
+
+				current_operation_delay = stick_collection_model->binary_search_delay;
+
+				search_thread = std::thread(&StickCollectionController::ProcessBinarySearch, this);
+
 				break;
 			}
 		}

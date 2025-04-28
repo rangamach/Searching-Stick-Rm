@@ -42,9 +42,13 @@ namespace Gameplay
 			void ResetVariables();
 
 			void ProcessLinearSearch();
+			void ProcessBinarySearch();
 			void ProcessSearchThreadState();
 			
 			void JoinThreads();
+
+			void SortElements();
+			bool CompareElementsByData(const Stick* stick_1, const Stick* stick_2);
 
 		public:
 			StickCollectionController();

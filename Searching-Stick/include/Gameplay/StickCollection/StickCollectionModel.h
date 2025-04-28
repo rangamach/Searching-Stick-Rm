@@ -25,6 +25,7 @@ namespace Gameplay
 			const sf::Color processing_stick_color = sf::Color::Red;
 
 			int linear_search_delay = 120;
+			int binary_search_delay = 240;
 			int number_of_sticks = 100;
 
 			StickCollectionModel();
