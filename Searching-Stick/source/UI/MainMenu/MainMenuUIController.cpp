@@ -5,6 +5,7 @@
 #include "Event/EventService.h"
 #include "Global/Config.h"
 #include "Global/ServiceLocator.h"
+#include <Gameplay/StickCollection/StickCollectionModel.h>
 
 namespace UI
 {
@@ -76,11 +77,15 @@ namespace UI
         {
             // GameState will change to gameplay state.
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
+            GameService::setGameState(GameState::GAMEPLAY);
+            ServiceLocator::getInstance()->GetGameplayService()->SearchElement(Gameplay::StickCollection::SearchType::LinearSearch);
         }
 
         void MainMenuUIController::binarySearchButtonCallback()
         {
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
+            GameService::setGameState(GameState::GAMEPLAY);
+            ServiceLocator::getInstance()->GetGameplayService()->SearchElement(Gameplay::StickCollection::SearchType::BinarySearch);
         }
 
         void MainMenuUIController::quitButtonCallback()
